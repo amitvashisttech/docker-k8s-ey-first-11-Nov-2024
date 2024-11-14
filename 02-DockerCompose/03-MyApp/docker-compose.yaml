@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  web: 
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+
+
+  python: 
+    image: amitvashist7/docker-k8s-ey-first-11-nov-2024-python:v2
+    ports:
+      - "8081:5000"

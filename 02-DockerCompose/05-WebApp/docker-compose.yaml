@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  web: 
+    image: nginx:alpine
+    ports:
+      - "8085:80"
+    networks:
+      - mynet
+    volumes:
+      - mynginx-app-vol1:/myapp1
+      - mynginx-app-vol2:/myapp2
+
+
+
+  python: 
+    image: amitvashist7/docker-k8s-ey-first-11-nov-2024-python:v2
+    ports:
+      - "8086:5000"
+    networks:
+      - mynet
+    volumes:
+      - mypython-app-vol1:/myapp1
+      - mypython-app-vol2:/myapp2
+
+
+networks:
+  mynet:
+    driver: bridge
+
+volumes:
+  mynginx-app-vol1:
+  mynginx-app-vol2:
+  mypython-app-vol1:
+  mypython-app-vol2:
