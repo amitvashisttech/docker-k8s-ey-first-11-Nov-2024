@@ -17,7 +17,7 @@ services:
     ports:
       - "8086:5000"
     networks:
-      - mynet
+      - mynet2
     volumes:
       - mypython-app-vol1:/myapp1
       - mypython-app-vol2:/myapp2
@@ -26,7 +26,8 @@ services:
 networks:
   mynet:
     driver: bridge
-
+  mynet2:
+    driver: bridge
 volumes:
   mynginx-app-vol1:
   mynginx-app-vol2:
