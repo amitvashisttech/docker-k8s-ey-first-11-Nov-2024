@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-deploymenti-with-quota
+  labels:
+    app: helloworld
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: k8s-demo
+        image: amitvashist7/k8s-demo
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: node-port
+          containerPort: 3000
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
+          limits:
+            cpu: 400m
+            memory: 500Mi
+
