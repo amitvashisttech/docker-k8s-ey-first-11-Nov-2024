@@ -1,0 +1,37 @@
+```
+ 1686  cd 15-User-Management/
+ 1688  apt-get install openssl -y
+ 1691  openssl genrsa -out amit.pem 2048
+ 1693  cat amit.pem
+ 1694  openssl req -new -key amit.pem -out amit-csr.pem -subj "/CN=amit/O=training"
+ 1696  cat amit.pem
+ 1697  cat amit-csr.pem
+```
+
+```
+ 1705  kubectl get nodes
+ 1708  docker exec -it k8s-control-plane ls /etc/kubernetes/pki
+ 1711  docker exec -it k8s-control-plane cat /etc/kubernetes/pki/ca.crt > ca.crt
+ 1712  docker exec -it k8s-control-plane cat /etc/kubernetes/pki/ca.key
+ 1713  docker exec -it k8s-control-plane cat /etc/kubernetes/pki/ca.key > ca.key
+ 1714  ls
+ 1723  openssl x509 -req -in amit-csr.pem -CA ca.crt -CAkey ca.key -CAcreateserial -out amit.crt
+ 1725  openssl x509 -in amit.crt -text -noout
+```
+
+```
+ 1727  kubectl config view
+ 1728  kubectl config set-credentials amit --client-certificate=/root/amit.crt --client-key=/root/amit.pem
+ 1729  kubectl config view
+ 1730  kubectl config get-contexts
+ 1731  kubectl config set-context amit@kind-k8s  --cluster=kind-k8s --user=amit
+ 1732  kubectl config get-contexts
+ 1733  kubectl config view
+ 1734  kubectl config get-contexts
+ 1735  kubectl config use-context amit@kind-k8s
+ 1736  kubectl config get-contexts
+```
+```
+ 1737  kubectl get nodes
+ 1738  kubectl get po
+```
